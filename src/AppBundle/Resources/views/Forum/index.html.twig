@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Forum:index{% endblock %}
+
+{% block body %}
+<ul class="collection">
+
+    {% for forum in forums %}
+    <li class="collection-item avatar">
+        <i class="material-icons circle">folder</i>
+        <span class="title">
+            <a href="{{ path('app_forum_show', {id: forum.id}) }}">{{ forum.title }}</a>
+        </span>
+        <p>
+            <blockquote> {{ forum.description }}</blockquote>
+        </p>
+    </li>
+    {% endfor %}
+</ul>
+
+    <a href="{{ path('app_forum_add') }}" >
+        <button class="btn waves-effect waves_light">
+            Create new topic <i class="material-icons right">send</i>
+        </button>
+    </a>
+{% endblock %}

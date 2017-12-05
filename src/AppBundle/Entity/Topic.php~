@@ -162,45 +162,4 @@ class Topic
     {
         return $this->forum;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->post = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add post
-     *
-     * @param \AppBundle\Entity\Post $post
-     *
-     * @return Topic
-     */
-    public function addPost(\AppBundle\Entity\Post $post)
-    {
-        $this->post[] = $post;
-
-        return $this;
-    }
-
-    /**
-     * Remove post
-     *
-     * @param \AppBundle\Entity\Post $post
-     */
-    public function removePost(\AppBundle\Entity\Post $post)
-    {
-        $this->post->removeElement($post);
-    }
-
-    /**
-     * Get post
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
 }
