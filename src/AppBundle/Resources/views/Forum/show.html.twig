@@ -3,14 +3,20 @@
 {% block title %}AppBundle:Forum:show{% endblock %}
 
 {% block body %}
-<h3>{{ forum.title }}</h3>
-<blockquote>{{ forum.description }}</blockquote>
+<h3> Forum <b>{{ forum.title }}</b></h3>
+<blockquote>Description : {{ forum.description }}</blockquote>
 
 <a href="{{ path('app_topic_add', {forum_id: forum.id}) }}">
-    <button class="btn waves-effect waves_light">
-        Create new topic <i class="material-icons right">send</i>
+    <button class="btn waves-effect waves_light light-blue darken-1">
+        Créer un nouveau sujet <i class="material-icons right">send</i>
     </button>
 </a>
+
+    <a href="{{ path('app_forum_index', {id: forum.id}) }}">
+        <button class="btn waves-effect waves_light grey">
+            Retour <i class="material-icons right">replay</i>
+        </button>
+    </a>
 
 <ul class="collection">
     {% for topic in forum.topics %}
@@ -20,9 +26,15 @@
             <a href="{{ path('app_topic_show', {forum_id: forum.id, id: topic.id}) }}"> {{ topic.title }} </a>
 
         </span>
-        <span class="secondary-content">
+        <span class="content">
             {{ topic.author }} - {{ topic.creation | date }}
         </span>
+
+        <a href="{{ path('app_topic_remove', {forum_id: forum.id, id: topic.id}) }}">
+            <button class="btn red darken-1 waves-effect waves_light right">
+                Suprimer le sujet
+            </button>
+        </a>
     </li>
 {% endfor %}
 

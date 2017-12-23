@@ -51,9 +51,9 @@ class Topic
     private $forum;
 
     /**
-     * @var Collection
+     * @var Post
      *
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="topic")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="topic", cascade={"remove"})
      */
     private $post;
 

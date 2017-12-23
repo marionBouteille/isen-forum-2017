@@ -64,4 +64,24 @@ class ForumController extends Controller
         ));
     }
 
+    /**
+     * @Route("/remove{id}", requirements={"id" : "\d+"}, name="app_forum_remove")
+     */
+    public function removeAction($id)
+    {
+        $forum = $this->getDoctrine()
+            ->getRepository(Forum::class)
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($forum);
+        $em->flush();
+
+        return $this->redirectToRoute('app_forum_index', [
+            'id'=>$id
+        ]);
+    }
+
+
+
 }

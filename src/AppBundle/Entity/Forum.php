@@ -39,7 +39,7 @@ class Forum
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="Topic", mappedBy="forum")
+     * @ORM\OneToMany(targetEntity="Topic", mappedBy="forum", cascade={"remove"})
      */
     private $topics;
 

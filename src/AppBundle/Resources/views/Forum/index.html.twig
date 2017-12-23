@@ -3,24 +3,37 @@
 {% block title %}AppBundle:Forum:index{% endblock %}
 
 {% block body %}
-<ul class="collection">
 
+    <h3> Liste des forums</h3>
+
+    <a href="{{ path('app_forum_add') }}" >
+        <button class="btn waves-effect waves_light  light-blue darken-1">
+            Créer un nouveau forum <i class="material-icons right">send</i>
+        </button>
+    </a>
+
+<ul class="collection">
     {% for forum in forums %}
-    <li class="collection-item avatar">
+
+    <li class="collection-item avatar ">
         <i class="material-icons circle">folder</i>
         <span class="title">
-            <a href="{{ path('app_forum_show', {id: forum.id}) }}">{{ forum.title }}</a>
+            <a href ="{{ path('app_forum_show', {id: forum.id}) }}">{{ forum.title }}</a>
+
         </span>
+        <a href="{{ path('app_forum_remove', {id: forum.id}) }}">
+            <button class="btn red darken-1 waves-effect waves_light right">
+                Supprimer le forum
+            </button>
+        </a>
         <p>
             <blockquote> {{ forum.description }}</blockquote>
         </p>
+
     </li>
+
     {% endfor %}
 </ul>
 
-    <a href="{{ path('app_forum_add') }}" >
-        <button class="btn waves-effect waves_light">
-            Create new topic <i class="material-icons right">send</i>
-        </button>
-    </a>
+
 {% endblock %}

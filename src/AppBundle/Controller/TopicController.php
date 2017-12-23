@@ -56,14 +56,34 @@ class TopicController extends Controller
     /**
      * @Route("/{id}", requirements={"id": "\d+"}, name = "app_topic_show")
      */
-    public function showAction($id)
+
+   public function showAction($id, $forum_id)
     {
         return $this->render('AppBundle:Topic:show.html.twig', array(
             'topic' => $this->getDoctrine()
                 ->getRepository(Topic::class)
-                ->find($id)
+                ->find($id),
+            'forum'=>$this->getDoctrine()->getRepository(Forum::class)->find($forum_id)
             // ...
         ));
+    }
+
+    /**
+     * @Route("/remove{id}", requirements={"id" : "\d+"}, name="app_topic_remove")
+     */
+    public function removeAction($forum_id,$id)
+    {
+        $topic = $this->getDoctrine()
+            ->getRepository(Topic::class)
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($topic);
+        $em->flush();
+
+        return $this->redirectToRoute('app_forum_show', [
+            'id'=>$forum_id
+        ]);
     }
 
 }

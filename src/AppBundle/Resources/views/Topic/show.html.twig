@@ -3,27 +3,41 @@
 {% block title %}AppBundle:Topic:show{% endblock %}
 
 {% block body %}
-<h3>{{ topic.title }}</h3>
-<blockquote>{{ topic.author }}</blockquote>
+<h3>Topic <b>{{ topic.title }}</b></h3>
+<blockquote>L'auteur est {{ topic.author }}</blockquote>
 
-<a href="{{ path('app_post_add', {topic_id: topic.id}) }}">
-    <button class="btn waves-effect waves_light">
-        Create new message <i class="material-icons right">send</i>
-    </button>
-</a>
+    <a href="{{ path('app_post_add', {forum_id: forum.id, topic_id: topic.id}) }}">
+         <button class="btn waves-effect waves_light light-blue darken-1">
+        Créer un nouveau message <i class="material-icons right">send</i>
+        </button>
+    </a>
+
+    <a href="{{ path('app_forum_show', {id: forum.id}) }}">
+        <button class="btn waves-effect waves_light grey">
+            Retour <i class="material-icons right">replay</i>
+        </button>
+    </a>
 
 <ul class="collection">
     {% for post in topic.post %}
     <li class="collection-item avatar">
         <i class="material-icons circle green">insert_chart</i>
         <span class="title">
-         {# <a href="{{ path('app_topic_show', {topic_id: topic.id, id: post.id}) }}"> </a> #}
-            {{ post.message }}
+         <a href="{{ path('app_topic_show', {forum_id: forum.id, topic_id: topic.id, id: post.id}) }}"> </a>
+            {{ post.content }}
         </span>
-        <span class="secondary-content">
+        <span class="content">
             {{ post.author }} - {{ post.creation | date }}
         </span>
+
+        <a href="{{ path('app_post_remove', {forum_id: forum.id, topic_id: topic.id, id: post.id}) }}">
+            <button class="btn red darken-1 waves-effect waves_light right">
+                Supprimer le message
+            </button>
+        </a>
     </li>
+
+
 {% endfor %}
 
 </ul>

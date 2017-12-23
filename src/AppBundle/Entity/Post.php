@@ -43,7 +43,7 @@ class Post
     private $content;
 
     /**
-     * @var Forum
+     * @var Topic
      *
      * @ORM\ManyToOne(targetEntity="Topic", inversedBy="post")
      * @ORM\JoinColumn(name="topic_id", referencedColumnName="id")
@@ -157,5 +157,5 @@ class Post
         return $this->topic;
     }
 
-    
+
 }
